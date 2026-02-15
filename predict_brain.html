@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brain Tumor Prediction</title>
+    <link rel="stylesheet" href="/static/css/predict_brain.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Brain Tumor Prediction</h1>
+        <form action="/predict_brain" method="post" enctype="multipart/form-data">
+            <label for="file">Upload an image:</label>
+            <input type="file" name="file" id="file" accept="image/*" required onchange="previewImage(event)">
+            <button type="submit">Predict</button>
+        </form>
+
+        <!-- Aperçu de l'image -->
+        <div class="image-preview" id="imagePreview">
+            <h3>Image Preview:</h3>
+            <img id="preview" src="#" alt="Your uploaded image will appear here" style="display: none;">
+        </div>
+
+        {% if result %}
+        <div class="result">
+            <h2>Prediction Result:</h2>
+            <p>{{ result }}</p>
+        </div>
+        {% endif %}
+
+        {% if questions %}
+        <div class="question-container">
+            <h3>Ask a Question:</h3>
+            <div class="question-buttons">
+                {% for question in questions %}
+                <button type="button" onclick="askPredefinedQuestion('{{ question }}')">{{ question }}</button>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
+        <div id="chatContainer" class="chat-container"></div>
+    </div>
+
+    <script>
+        // Fonction pour prévisualiser l'image avant l'upload
+        function previewImage(event) {
+            const preview = document.getElementById('preview');
+            const file = event.target.files[0];
+
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    preview.src = e.target.result;
+                    preview.style.display = "block";
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // Fonction pour poser une question et recevoir une réponse
+        async function askPredefinedQuestion(question) {
+            const chatContainer = document.getElementById("chatContainer");
+
+            // Ajouter la question de l'utilisateur au chat
+            const userMessage = document.createElement("div");
+            userMessage.classList.add("message", "user");
+            userMessage.textContent = "Patient: " + question;
+            chatContainer.appendChild(userMessage);
+
+            try {
+                // Envoyer la question au serveur
+                const response = await fetch("/ask_question", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                    body: new URLSearchParams({ question })
+                }).then((res) => res.json());
+
+                // Ajouter un conteneur pour la réponse
+                const botMessage = document.createElement("div");
+                botMessage.classList.add("message", "bot");
+                chatContainer.appendChild(botMessage);
+
+                // Simuler une réponse progressive (typewriter effect)
+                let responseText = response.response || "Erreur : Réponse non disponible.";
+                let i = 0;
+
+                function typeWriter() {
+                    if (i < responseText.length) {
+                        botMessage.textContent += responseText.charAt(i);
+                        i++;
+                        setTimeout(typeWriter, 50);
+                    }
+                }
+                typeWriter();
+
+                // Faire défiler vers le bas automatiquement
+                chatContainer.scrollTop = chatContainer.scrollHeight;
+            } catch (error) {
+                console.error("Erreur lors de la récupération de la réponse :", error);
+            }
+        }
+    </script>
+</body>
+</html>

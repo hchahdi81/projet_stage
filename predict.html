@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cancer Type Prediction</title>
+    <link rel="stylesheet" href="/static/css/predict.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Section Upload -->
+        <div class="upload-container">
+            <h2>📷 Upload an Image</h2>
+            <form action="/predict" method="post" enctype="multipart/form-data">
+                <label for="file">Choose an image:</label>
+                <input type="file" name="file" id="file" accept="image/*" required onchange="previewImage(event)">
+                <button type="submit">Predict</button>
+            </form>
+            <div class="image-preview" id="imagePreview">
+                <h3>Image Preview:</h3>
+                <img id="preview" src="#" alt="Your uploaded image will appear here" style="display: none;">
+            </div>
+        </div>
+
+        <!-- Section Résultat + Questions -->
+        <div class="result-container">
+            {% if result %}
+            <div class="prediction">
+                <h3>🔬 Prediction Result</h3>
+                <p><strong>Predicted Cancer Type:</strong> {{ result }}</p>
+            </div>
+            {% endif %}
+
+            <!-- Generic Questions -->
+            {% if questions %}
+            <div class="generic-questions">
+                <h3>💡 Suggested Questions</h3>
+                <div class="question-buttons">
+                    {% for question in questions %}
+                        <button onclick="askPredefinedQuestion('{{ question }}')">{{ question }}</button>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+
+            <!-- Chatbot -->
+            <div class="chat-container">
+                <h3>🤖 Ask a Question</h3>
+                <div id="chat-box" class="chat-box">
+                    {% for entry in history %}
+                        {% if entry['role'] == 'user' %}
+                            <div class="message user">{{ entry['message'] }}</div>
+                        {% else %}
+                            <div class="message bot">{{ entry['message'] }}</div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                
+                <form id="questionForm" action="/ask_question" method="post">
+                    <input type="text" name="question" id="questionInput" placeholder="Posez votre question ici..." required>
+                    <button type="submit">Envoyer</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function previewImage(event) {
+            const preview = document.getElementById('preview');
+            const file = event.target.files[0];
+
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    preview.src = e.target.result;
+                    preview.style.display = "block";
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        async function askPredefinedQuestion(question) {
+            const chatBox = document.getElementById("chat-box");
+
+            // Ajouter la question de l'utilisateur
+            let userMessage = document.createElement("div");
+            userMessage.classList.add("message", "user");
+            userMessage.textContent = question;
+            chatBox.appendChild(userMessage);
+
+            const response = await fetch("/ask_question", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded",
+                },
+                body: new URLSearchParams({ question }),
+            }).then(res => res.json());
+
+            // Ajouter la réponse du bot
+            let botMessage = document.createElement("div");
+            botMessage.classList.add("message", "bot");
+            chatBox.appendChild(botMessage);
+
+            let responseText = response.response;
+            let i = 0;
+
+            function typeWriter() {
+                if (i < responseText.length) {
+                    botMessage.textContent += responseText.charAt(i);
+                    i++;
+                    setTimeout(typeWriter, 30);
+                }
+            }
+            typeWriter();
+
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+    </script>
+</body>
+</html>
