@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot Médical</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="chat-container">
+        <h1>🤖 Chatbot Médical</h1>
+        <div class="chat-box" id="chatBox"></div>
+        <form id="chatForm">
+            <input type="text" id="questionInput" placeholder="Posez une question..." required>
+            <button type="submit">Envoyer</button>
+        </form>
+    </div>
+
+    <script>
+        let socket = new WebSocket("ws://127.0.0.1:8004/ws");
+
+        socket.onmessage = function(event) {
+            let chatBox = document.getElementById("chatBox");
+            let botMessage = `<div class="message bot-message"><strong>Bot :</strong> ${event.data}</div>`;
+            chatBox.innerHTML += botMessage;
+            chatBox.scrollTop = chatBox.scrollHeight;
+        };
+
+        document.getElementById("chatForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            let input = document.getElementById("questionInput");
+            let chatBox = document.getElementById("chatBox");
+
+            if (input.value.trim() !== "") {
+                let userMessage = `<div class="message user-message"><strong>Vous :</strong> ${input.value}</div>`;
+                chatBox.innerHTML += userMessage;
+                socket.send(input.value);
+                input.value = "";
+                chatBox.scrollTop = chatBox.scrollHeight;
+            }
+        });
+    </script>
+</body>
+</html>
