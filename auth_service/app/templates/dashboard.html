@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tableau de Bord</title>
+    <link rel="stylesheet" href="/static/css/dashboard.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <h1>Bienvenue sur votre Tableau de Bord</h1>
+        <p>Utilisateur connecté : <strong>{{ user }}</strong></p>
+        <p>Choisissez une action :</p>
+        
+        <div class="dashboard-buttons">
+            <a href="http://127.0.0.1:8001" class="btn-custom btn-primary">Analyser un rapport</a>
+            <a href="http://127.0.0.1:8002/predict" class="btn-custom btn-secondary">Détecteur des 8 types de cancer</a>
+            <a href="http://127.0.0.1:8002/predict_brain" class="btn-custom btn-success">Détecteur du cancer des tumeurs cérébrales</a>
+            <a href="http://127.0.0.1:8004" class="btn-custom btn-warning">Chatbot Médical</a>
+            <a href="/logout" class="btn-custom btn-danger">Se Déconnecter</a>
+        </div>
+    </div>
+</body>
+</html>

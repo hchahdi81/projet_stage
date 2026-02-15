@@ -1,0 +1,105 @@
+/* Ajout d'une image de fond */
+body {
+    background: url('/static/images/background.webp') no-repeat center center/cover;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Arial, sans-serif;
+}
+
+/* Conteneur principal */
+.container {
+    background: rgba(255, 255, 255, 0.9); /* Effet semi-transparent */
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(90, 3, 204, 0.2);
+    width: 400px;
+    text-align: center;
+    animation: fadeIn 0.8s ease-in-out;
+}
+
+/* Animation d’apparition */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Titre */
+h1 {
+    color: #333;
+    font-size: 22px;
+    margin-bottom: 20px;
+}
+
+/* Conteneur pour centrer les boutons */
+.auth-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+/* Style des boutons */
+.btn {
+    display: inline-block;
+    padding: 12px 18px;
+    width: 70%;
+    border: none;
+    border-radius: 8px;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+    transition: all 0.3s ease-in-out;
+    background-color: #6a11cb;
+    box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+/* Effet au survol */
+.btn:hover {
+    transform: scale(1.08);
+    opacity: 0.9;
+}
+
+/* Conteneur spécifique pour les boutons */
+.auth-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    gap: 15px; /* Ajoute un espace de 15px entre les boutons */
+}
+
+.auth-buttons .btn {
+    width: 80%;
+    padding: 14px;
+    font-size: 18px;
+    margin-bottom: 10px; /* Ajoute un espace sous chaque bouton */
+}
+
+/* Supprime la marge du dernier bouton pour éviter un espace en trop */
+.auth-buttons .btn:last-child {
+    margin-bottom: 0;
+}
+
+
+/* Boutons spécifiques */
+.register {
+    background-color: #6a11cb;
+}
+
+.login {
+    background-color: #4a0072;
+}
+
+/* Effet au survol */
+.register:hover {
+    background-color: #540bb5;
+}
+
+.login:hover {
+    background-color: #3a0059;
+}

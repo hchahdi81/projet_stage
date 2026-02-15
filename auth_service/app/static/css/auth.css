@@ -1,0 +1,113 @@
+/* Styles généraux */
+body {
+    background: url('/static/images/background.webp') no-repeat center center fixed;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Arial, sans-serif;
+    height: 100vh;
+    margin: 0;
+}
+
+/* Effet de flou sur l'arrière-plan */
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    z-index: -1; /* Pour placer l'effet en arrière-plan */
+}
+
+/* Conteneur du formulaire */
+.container {
+    background: rgba(255, 255, 255, 0.85); /* Transparence douce */
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    width: 400px;
+    text-align: center;
+    animation: fadeIn 0.8s ease-in-out;
+    position: relative;
+    z-index: 1; /* Pour s'assurer qu'il reste au-dessus du flou */
+}
+
+/* Animation d’apparition */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Titre */
+h2 {
+    color: #333;
+    font-size: 22px;
+    margin-bottom: 20px;
+}
+
+/* Conteneur des champs pour bien centrer */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+/* Champs de formulaire */
+input[type="email"], input[type="password"], input[type="text"] {
+    width: 90%;
+    padding: 12px;
+    margin: 8px 0;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: all 0.3s ease-in-out;
+    text-align: center;
+}
+
+/* Effet focus */
+input:focus {
+    border-color: #6a11cb;
+    outline: none;
+    box-shadow: 0 0 8px rgba(106, 17, 203, 0.3);
+}
+
+/* Bouton */
+button {
+    width: 90%;
+    padding: 12px;
+    margin-top: 15px;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    background: #6a11cb;
+    color: white;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Effet hover bouton */
+button:hover {
+    background: #4b0ca3;
+    transform: scale(1.05);
+}
+
+/* Lien d'inscription / connexion */
+.link {
+    display: block;
+    margin-top: 15px;
+    color: #6a11cb;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s;
+}
+
+.link:hover {
+    text-decoration: underline;
+    color: #4b0ca3;
+}
