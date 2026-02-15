@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload PDF</title>
+    <link rel="stylesheet" href="/static/css/upload.css">
+</head>
+<body>
+    <div class="container">
+        <h1>📂 Upload a Medical Report</h1>
+        <form action="/upload" method="post" enctype="multipart/form-data">
+            <div class="upload-box">
+                <input type="file" name="file" accept="application/pdf" required>
+            </div>
+            <button type="submit" class="upload-btn">Upload</button>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF Viewer</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/static/css/pdf_viewer.css">
+</head>
+<body>
+    <div class="container mt-4">
+        <div class="row">
+            <!-- Colonne gauche : Affichage du PDF -->
+            <div class="col-md-6">
+                <div class="card shadow-sm">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0">📄 Contenu du Rapport Médical</h5>
+                    </div>
+                    <div class="card-body pdf-content">
+                        <pre class="text-muted">{{ text }}</pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Colonne droite : Questions et réponses -->
+            <div class="col-md-6">
+                <div class="card shadow-sm">
+                    <div class="card-header bg-danger text-white text-center">
+                        <h5 class="mb-0">🤖 Posez une Question</h5>
+                    </div>
+                    <div class="card-body">
+                        <p class="text-muted">
+                            <strong>Note :</strong> Le chatbot répond uniquement aux questions basées sur le rapport ci-dessus.
+                            Si la réponse ne peut pas être dérivée, il dira <i>"Je ne sais pas"</i>.
+                        </p>
+                        
+                        <!-- Formulaire -->
+                        <form action="/ask_question" method="post">
+                            <input type="hidden" name="text" value="{{ text }}">
+                            <div class="input-group mb-3">
+                                <input type="text" name="question" class="form-control" placeholder="Tapez votre question ici..." required>
+                                <button class="btn btn-primary" type="submit">Poser la question</button>
+                            </div>
+                        </form>
+
+                        <!-- Historique des questions et réponses -->
+                        <div class="chat-history">
+                            <h5 class="text-secondary">📜 Historique</h5>
+                            <div class="messages">
+                                {% for q, r in history %}
+                                    <div class="message user bg-primary text-white p-2 rounded mb-2">
+                                        <strong>Vous :</strong> {{ q }}
+                                    </div>
+                                    <div class="message bot bg-light p-2 rounded mb-2">
+                                        <strong>Bot :</strong> {{ r }}
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS pour les interactions -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

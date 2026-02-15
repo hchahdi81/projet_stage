@@ -1,0 +1,100 @@
+/* 🌟 Styles Généraux */
+body {
+    background: url('/static/images/background.avif') no-repeat center center/cover;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Arial', sans-serif;
+    flex-direction: column;
+    margin: 0;
+}
+
+/* Conteneur principal */
+.container {
+    max-width: 1200px;
+}
+
+/* Carte pour le PDF */
+.pdf-content {
+    max-height: 60vh;
+    overflow-y: auto;
+    padding: 10px;
+    font-size: 14px;
+    background: #fff;
+    border-radius: 5px;
+    box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Carte des questions */
+.card {
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Style du champ input */
+.input-group input {
+    border-radius: 8px 0 0 8px;
+}
+
+/* Historique des messages */
+.chat-history {
+    max-height: 250px;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    padding: 10px;
+    background: rgba(240, 240, 240, 0.9);
+    border-radius: 8px;
+    margin-top: 10px;
+}
+
+/* Style des messages utilisateur */
+.message.user {
+    background: #6a11cb;
+    color: white;
+    padding: 8px;
+    border-radius: 8px;
+    text-align: right;
+}
+
+/* Style des messages bot */
+.message.bot {
+    background: #e0e0e0;
+    color: black;
+    padding: 8px;
+    border-radius: 8px;
+    text-align: left;
+}
+/* Agrandir la carte des questions et réponses */
+.card-question {
+    width: 100%;
+    max-width: 800px; /* Augmente la largeur */
+    margin: auto;
+}
+
+/* Augmenter la hauteur de l'historique des messages */
+.chat-history {
+    max-height: 500px; /* Augmente la hauteur */
+    overflow-y: auto;
+    padding: 15px;
+}
+
+/* Messages utilisateur et bot */
+.message.user {
+    background: #007BFF;
+    color: white;
+    padding: 14px;
+    border-radius: 10px;
+    text-align: right;
+    font-size: 18px;
+}
+
+.message.bot {
+    background: #e0e0e0;
+    color: black;
+    padding: 14px;
+    border-radius: 10px;
+    text-align: left;
+    font-size: 18px;
+}

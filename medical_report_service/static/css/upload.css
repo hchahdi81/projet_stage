@@ -1,0 +1,145 @@
+/* 🌟 Styles Généraux */
+body {
+    background: url('/static/images/background.avif') no-repeat center center/cover;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Arial', sans-serif;
+    flex-direction: column;
+    margin: 0;
+}
+
+/* 📂 Conteneur Principal */
+.container {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    width: 500px;
+    text-align: center;
+    animation: fadeIn 0.8s ease-in-out;
+}
+
+/* Animation d’apparition */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* 📄 Zone d'Upload */
+.upload-box {
+    border: 2px dashed #6a11cb;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    cursor: pointer;
+    margin-bottom: 15px;
+    transition: all 0.3s ease-in-out;
+}
+
+.upload-box:hover {
+    background: rgba(106, 17, 203, 0.1);
+}
+
+/* 🎨 Bouton d'Upload */
+.upload-btn {
+    background-color: #6a11cb;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.upload-btn:hover {
+    background-color: #4b0ca3;
+    transform: scale(1.05);
+}
+
+/* 🏥 Résultats du Rapport */
+.result-box {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 15px;
+    border-radius: 10px;
+    margin-top: 20px;
+    text-align: left;
+    max-width: 600px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 📜 Chatbox */
+.chat-container {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    width: 500px;
+    margin-top: 20px;
+}
+
+.chat-box {
+    max-height: 300px;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    padding: 15px;
+    border-radius: 10px;
+    background: #f9f9f9;
+}
+
+/* 💬 Messages */
+.message {
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    max-width: 80%;
+}
+
+/* ✅ Message de l'utilisateur */
+.message.user {
+    background-color: #007BFF;
+    color: white;
+    align-self: flex-end;
+    text-align: right;
+}
+
+/* 🤖 Message du chatbot */
+.message.bot {
+    background-color: #6a11cb;
+    color: white;
+    align-self: flex-start;
+    text-align: left;
+}
+
+/* 📩 Formulaire de Chat */
+.chat-container form {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.chat-container input {
+    flex-grow: 1;
+    padding: 10px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+.chat-container button {
+    background: #6a11cb;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.chat-container button:hover {
+    background: #4b0ca3;
+    transform: scale(1.05);
+}
+
