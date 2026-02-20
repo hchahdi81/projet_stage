@@ -65,7 +65,7 @@ Includes pages for:
 - Viewing analysis output
 
 ---
-👨‍💻 Auteur
+##👨‍💻 Auteur
 Hatim Chahdi Développeur Python / Django / IA
 
 ## ⚙️ Installation
